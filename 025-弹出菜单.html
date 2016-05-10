@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8" />
+<title></title>
+<style>
+#div1{ background:#ccc; width:150px; height:200px; display:none;}
+</style>
+<script>
+/*
+cancelBubble	阻止冒泡
+*/
+window.onload = function ()
+{
+	var oDiv1 = document.getElementById("div1");
+	var oBtn1 = document.getElementById("btn1");	
+	
+	oBtn1.onclick = function(ev)
+	{
+		var oEvent = ev || event;
+		oDiv1.style.display = "block";
+		oEvent.cancelBubble = true;
+	}
+	
+	document.onclick = function()
+	{
+		oDiv1.style.display = "none";
+	}
+}
+</script>
+</head>
+<body>
+<input type="button" id="btn1"  value="点击"/>
+<div id="div1"></div>
+</body>
+</html>

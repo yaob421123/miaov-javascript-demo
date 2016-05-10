@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8" />
+<title></title>
+
+<script>
+/*
+createElement		创建节点
+appendChild			插入元素
+insertBefore		插入元素之前 insertBefore（子节点，谁之前）
+*/
+window.onload = function ()
+{
+	var oBtn1 = document.getElementById("btn1");
+	var oBtn2 = document.getElementById("btn2");
+	var oUl1 = document.getElementById("ul1");
+	
+	oBtn1.onclick = function ()
+	{
+		var oLi = document.createElement("li");
+		var aLi = oUl1.getElementsByTagName("li");
+		oLi.innerHTML = oBtn2.value;
+		//oUl1.appendChild(oLi);	
+		if(aLi.length == 0) //当li节点为空
+		{
+			oUl1.appendChild(oLi);	
+		}
+		else
+		{
+			oUl1.insertBefore(oLi,aLi[0]);	
+		}
+	}
+}
+</script>
+</head>
+<body>
+<input type="button" id="btn1" value="按钮" />
+<input type="text" id="btn2" />
+<ul id="ul1">
+	
+</ul>
+</body>
+</html>

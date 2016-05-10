@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8" />
+<title></title>
+
+<script>
+function getByClass(aParent,sClass)
+{
+	var aEle = aParent.getElementsByTagName('*');//获取aParent下所有元素
+	var arr = [];
+	
+	for(var i = 0; i < aEle.length; i++)
+	{
+		if(aEle[i].className == sClass)//通过className筛选
+		{
+			arr.push(aEle[i]);
+		}	
+	}
+	return arr;
+}
+window.onload = function ()
+{
+	var oUl1 = document.getElementById("ul1");
+	var aBox = getByClass(oUl1,'box');
+	
+	for(var i = 0; i< aBox.length; i++)
+	{
+		aBox[i].style.background = 'red';
+	}
+}
+</script>
+</head>
+<body>
+<ul id="ul1">
+	<li>111111111</li>
+	<li class="box">222222222</li>
+	<li>333333333</li>
+	<li class="box">444444444</li>
+	<li>555555555</li>
+	<li class="box">666666666</li>
+</ul>
+</body>
+</html>

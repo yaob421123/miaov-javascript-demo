@@ -1,0 +1,32 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8" />
+<title></title>
+<style>
+#div1{ height:200px; width:100px; background:red; right:0px; position:absolute; top:0px;}
+</style>
+<script src="js/move.js"></script>
+<script>
+/*
+ie6 用js，火狐用css绝对定位position:fixed
+window.onresize		页面重定大小
+window.onscroll		页面滚动事件
+document.documentElement.scrollTop || document.body.scrollTop	页面可视顶部到页面顶部距离
+document.documentElement.clientHeight		页面可视高度
+*/
+window.onresize = window.onload = window.onscroll = function ()
+{
+	var oDiv1 = document.getElementById("div1");
+	var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;//
+	var t = (document.documentElement.clientHeight - oDiv1.offsetHeight) / 2;
+	//oDiv1.style.top = scrollTop + t + "px";
+	
+	startMove(oDiv1,{top:scrollTop + t});
+}
+</script>
+</head>
+<body style="height:3000px;">
+<div id="div1"></div>
+</body>
+</html>

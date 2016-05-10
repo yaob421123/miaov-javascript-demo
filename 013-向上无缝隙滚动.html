@@ -1,0 +1,80 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8" />
+<title></title>
+<style>
+*{ margin:0px; padding:0px;list-style:none; font-size:12px;}
+#gd{ width:110px; height:370px; background:#BDBDBD; margin:50px auto 0 auto;position:relative;}
+#gd #t_btn{ width:110px; height:20px; line-height:20px; text-align:center; position:absolute; top:4px; cursor:pointer;}
+#gd #b_btn{ width:110px; height:20px;line-height:20px;text-align:center; position:absolute; bottom:4px;cursor:pointer;}
+.gd_cont{width:100px; height:320px;  left:5px; overflow:hidden; position:absolute; top:25px;cursor:pointer;}
+#gd ul{ overflow:hidden; position:absolute;  background:#B5B5B5;}
+#gd ul li{ width:100px; height:100px; margin:5px 0; background:#662B2C; font-size:60px;}
+</style>
+<script>
+window.onload = function ()
+{
+	var oGd = document.getElementById("gd");
+	var oT_btn = document.getElementById("t_btn");
+	var oB_btn = document.getElementById("b_btn");
+	var aCont = oGd.getElementsByTagName("ul")[0];
+	
+	var timer = null;
+	var speed = 0;
+	aCont.innerHTML += aCont.innerHTML;
+	
+	
+	oT_btn.onclick = function()
+	{
+		clearInterval(timer);
+		speed = -5;
+		timer = setInterval(domove,50);
+	}
+	oB_btn.onclick = function()
+	{
+		clearInterval(timer);
+		speed = 5;
+		timer = setInterval(domove,50);
+	}
+	aCont.onmouseover = function()
+	{
+		clearInterval(timer);
+	}
+	aCont.onmouseout = function()
+	{
+		timer = setInterval(domove,50);
+	}
+	
+	function domove()
+	{
+		aCont.style.top = aCont.offsetTop + speed + "px";
+		if(aCont.offsetTop < -aCont.offsetHeight/2)
+		{
+			aCont.style.top = "0px";
+		}
+		else if(aCont.offsetTop > 0)
+		{
+			aCont.style.top = -aCont.offsetHeight/2 + "px";
+		}
+	}
+}
+</script>
+</head>
+<body>
+<div id="gd">
+	<div id="t_btn">向上滚动</div>
+	<div class="gd_cont">
+		<ul>
+			<li>1</li>
+			<li>2</li>
+			<li>3</li>
+			<li>4</li>
+			<li>5</li>
+			<li>6</li>
+		</ul>
+	</div>
+	<div id="b_btn">想下滚动</div>
+</div>
+</body>
+</html>

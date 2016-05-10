@@ -1,0 +1,71 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8" />
+<title></title>
+<style>
+*{ padding:0; margin:0; border:0; list-style-type:none; text-decoration:none;}
+.nav ul{ clear:both; margin:50px auto 0 auto; position:relative; background:#ccc; display:block; overflow:hidden; width:100px; height:255px; }
+.nav ul li{ width:100px; height:50px; line-height:50px; text-align:center; z-index:2;position:relative; border-bottom:1px solid #BFBFBF;}
+.nav ul li a{ color:#424242; display:block;}
+.nav ul li.on a{ color:#FFFFFF;}
+#bg{ position:absolute; width:100px; height:50px; left:0; top:0; background:#9F893C; z-index:1; overflow:hidden; border:none;}
+
+</style>
+<script>
+window.onload = function()
+{
+	var oUl1 = document.getElementById("ul1");
+	var aLi = oUl1.getElementsByTagName("li");
+	var oBg = document.getElementById("bg");
+	
+	for(var i = 0; i < aLi.length - 1; i++)
+	{
+		aLi[0].className= "on";
+		aLi[i].onmouseover = function()
+		{
+			for(var j = 0; j < aLi.length - 1; j++)
+			{
+				aLi[j].className= ""
+			}
+			this.className= "on"
+			startMove(oBg,this.offsetTop);	
+		}
+	}
+}
+var ispeed = 0;
+var oTop = 0;
+function startMove(obj,iTarget)
+{
+	clearInterval(obj.timer);
+	obj.timer = setInterval(function(){
+		ispeed += (iTarget - obj.offsetTop) / 5;
+		ispeed *= 0.7;
+		oTop += ispeed;
+		if(Math.abs(ispeed) < 1 && Math.abs(oTop - iTarget) < 1)
+		{
+			clearInterval(obj.timer);
+			obj.style.top = iTarget + "px";
+		}
+		else
+		{
+			obj.style.top = oTop  + "px";
+		}
+		document.title=obj.style.top;
+	},30);	
+}
+</script>
+</head>
+<body>
+<div class="nav">
+	<ul id="ul1">
+		<li><a href="#">首页</a></li>
+		<li><a href="#">网站简介</a></li>
+		<li><a href="#">网站简介</a></li>
+		<li><a href="#">网站简介</a></li>
+		<li><a href="#">网站简介</a></li>
+		<li id="bg"></li>
+	</ul>
+</div>
+</body>
+</html>

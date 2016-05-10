@@ -1,0 +1,26 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8" />
+<title></title>
+<style>
+#div1{ background:red; width:100px; height:100px; position:absolute;}
+</style>
+<script>
+/*
+*/
+document.onmousemove = function(ev)
+{
+	var oDiv1 = document.getElementById("div1");
+	var oEvent = ev || event;
+	var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+	var scrollLeft = document.documentElement.scrollLeft || document.body.scrollLeft;
+	oDiv1.style.left = oEvent.clientX + scrollLeft + "px";
+	oDiv1.style.top = oEvent.clientY + scrollTop + "px";
+}
+</script>
+</head>
+<body style="height:2000px;">
+<div id="div1"></div>
+</body>
+</html>

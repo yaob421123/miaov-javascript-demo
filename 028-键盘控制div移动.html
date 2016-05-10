@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8" />
+<title></title>
+<style>
+#div1 {
+	background: red;
+	width: 50px;
+	height: 50px;
+	position: absolute;
+}
+</style>
+<script>
+/*
+*/
+
+window.onload = function()
+{
+	
+	var oDiv1 = document.getElementById("div1");
+	var scrollWidth = document.body.clientWidth || document.documentElement.clientHeight;
+	oDiv1.style.left = scrollWidth / 2 + "px"; 
+	window.onkeydown = function(ev)
+	{
+		//左37 右39
+		var oEvent = ev || event;
+		if(oEvent.keyCode == 37)
+		{
+			oDiv1.style.left = oDiv1.offsetLeft - 10 + "px";
+		}
+		else if(oEvent.keyCode == 39)
+		{
+			oDiv1.style.left = oDiv1.offsetLeft + 10 + "px";	
+		}	
+	}
+}
+</script>
+</head>
+<body>
+<div id="div1"></div>
+</body>
+</html>

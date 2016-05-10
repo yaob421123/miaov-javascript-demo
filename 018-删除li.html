@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8" />
+<title></title>
+
+<script>
+/*
+parentNode		获取某个元素的父节点
+offsetParent	获取页面实际位置
+removeChild		父级删除子节点
+*/
+window.onload = function ()
+{
+	var oUli = document.getElementById("ul1");
+	var aA = document.getElementsByTagName("a");
+	
+	for( var i = 0; i < aA.length; i++)
+	{
+		aA[i].onclick = function()
+		{
+			oUli.removeChild(this.parentNode);	
+		}	
+	}
+}
+</script>
+</head>
+<body>
+<ul id="ul1">
+	<li>111111111<a>删除</a></li>
+	<li>222222222<a>删除</a></li>
+	<li>333333333<a>删除</a></li>
+	<li>444444444<a>删除</a></li>
+	<li>555555555<a>删除</a></li>
+	<li>666666666<a>删除</a></li>
+</ul>
+</body>
+</html>

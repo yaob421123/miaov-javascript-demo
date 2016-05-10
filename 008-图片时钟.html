@@ -1,0 +1,50 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>无标题文档</title>
+<style>
+*{ text-decoration:none; list-style-type:none; padding:0px; margin:0px; font-size:80px; font-weight:bold;}
+</style>
+<script>
+function toDouble (num)
+{
+	if(num <10)
+	{
+		return '0' + num;	
+	}else{
+		return '' + num;	
+	}
+}
+window.onload = function ()
+{
+	var oTimer = document.getElementById("timer");
+	var aImg = oTimer.getElementsByTagName("img");
+	function upDateTimer ()
+	{
+		var oDate = new Date();
+		var str = '' + toDouble(oDate.getHours()) + toDouble(oDate.getMinutes()) + toDouble(oDate.getSeconds());
+		for(i = 0; i < aImg.length; i++)
+		{
+			aImg[i].src = '008_img/'+str.charAt(i)+'.png';
+		}
+	}
+	setInterval(upDateTimer,1000);
+	upDateTimer();
+}
+</script>
+</head>
+<body>
+<div id="timer">
+	<img src="008_img/0.png" />
+	<img src="008_img/0.png" />
+	点
+	<img src="008_img/0.png" />
+	<img src="008_img/0.png" />
+	分
+	<img src="008_img/0.png" />
+	<img src="008_img/0.png" />
+	秒
+</div>
+</body>
+</html>

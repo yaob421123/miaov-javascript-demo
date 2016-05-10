@@ -1,0 +1,83 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8" />
+<title></title>
+<style>
+*{ margin:0px; padding:0px;list-style:none;}
+#mnue #btn_l{ width:80px; height:30px; line-height:30px; background:#ccc; border:#ffff00;text-alige:center; float:left; margin-top:30px;}
+#mnue #btn_r{ width:80px; height:30px; line-height:30px; background:#ccc; border:#ffff00;text-align:center;float:left;margin-top:30px;}
+#mnue #cont{position:relative; width:562px; overflow:hidden; height:92px; float:left;}
+#cont ul{position:absolute; left:0;}
+#cont ul li{width:120px; height:90px; border:1px solid red; float:left; }
+</style>
+<script>
+window.onload = function ()
+{
+	
+	var oCont = document.getElementById("cont");
+	var aUll = oCont.getElementsByTagName("ul")[0];
+	var aLI = aUll.getElementsByTagName("li");
+	var oBtn_l = document.getElementById("btn_l");
+	var oBtn_r = document.getElementById("btn_r");
+	var ispeed = -5;
+	var timer = null;
+	
+	aUll.innerHTML += aUll.innerHTML;
+	aUll.style.width = aLI[0].offsetWidth * aLI.length + "px";
+	timer = setInterval(function(){
+		aUll.style.left = aUll.offsetLeft + ispeed + "px";
+		if(aUll.offsetLeft < -aUll.offsetWidth / 2){
+			aUll.style.left = "0px";
+		}
+		else if(aUll.offsetLeft >0)
+		{
+			aUll.style.left = -aUll.offsetWidth / 2 + "px";
+		}
+	},30);	
+	
+	oBtn_l.onmouseover = function()
+	{
+		ispeed = -5;
+	}
+	oBtn_r.onmouseover = function()
+	{
+		ispeed = 5;
+	}
+	aUll.onmouseover = function()
+	{
+		clearInterval(timer);
+	}
+	aUll.onmouseout = function ()
+	{
+		timer = setInterval(function(){
+		aUll.style.left = aUll.offsetLeft + ispeed + "px";
+		if(aUll.offsetLeft < -aUll.offsetWidth / 2){
+			aUll.style.left = "0px";
+		}
+		else if(aUll.offsetLeft >0)
+		{
+			aUll.style.left = -aUll.offsetWidth / 2 + "px";
+		}
+		},30);
+	}
+}
+</script>
+</head>
+<body>
+<div id="mnue">
+	<div id="btn_l">向左移动</div>
+	<div id="cont">
+		<ul>
+			<li>1</li>
+			<li>2</li>
+			<li>3</li>
+			<li>4</li>
+			<li>5</li>
+			<li>6</li>
+		</ul>
+	</div>
+	<div id="btn_r">向右移动</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8" />
+<title></title>
+<style>
+#div1 {
+	background: red;
+	width: 50px;
+	height: 50px;
+	position: absolute;
+}
+</style>
+<script>
+/*
+ctrlKey		返回布尔值默认为false,按下ctrl为true
+altKey	
+shiftKey	
+*/
+
+window.onload = window.onkeydown = function()
+{
+	var oTxt1 = document.getElementById("txt1");
+	var oTxt2 = document.getElementById("txt2");
+	var oBtn1 = document.getElementById("btn1");
+	
+	oBtn1.onclick = function ()
+	{
+		oTxt1.value += oTxt2.value + '\n';
+		oTxt2.value = "";
+	}
+	oTxt2.onkeydown = function (ev)
+	{
+		var oEvent = ev || event;
+		if(oEvent.ctrlKey && oEvent.keyCode == 13)
+		{
+			oTxt1.value += oTxt2.value + '\n';
+			oTxt2.value = "";	
+		}	
+	}
+}
+</script>
+</head>
+<body>
+<textarea id="txt1" rows="10" cols="40"></textarea><br/>
+<input id="txt2" type="text" />
+<input id="btn1" type="button" value="提交数据" />
+</body>
+</html>

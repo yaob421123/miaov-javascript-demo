@@ -1,0 +1,131 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<style>
+* {
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+	text-decoration: none;
+}
+#tab {
+	width: 304px;
+	height: 300px;
+	margin: 30px auto;
+}
+#tab ul {
+	display: block;
+	height: 30px;
+	border-left: 1px solid #ccc;
+	border-top: 1px solid #ccc;
+}
+#tab ul li {
+	float: left;
+	width: 100px;
+	height: 30px;
+	line-height: 30px;
+	text-align: center;
+	border-right: 1px solid #ccc;
+}
+#tab .tab_cont {
+	border: 1px solid #ccc;
+	height: 300px;
+}
+#tab2 {
+	width: 304px;
+	height: 300px;
+	margin: 30px auto;
+}
+#tab2 ul {
+	display: block;
+	height: 30px;
+	border-left: 1px solid #ccc;
+	border-top: 1px solid #ccc;
+}
+#tab2 ul li {
+	float: left;
+	width: 100px;
+	height: 30px;
+	line-height: 30px;
+	text-align: center;
+	border-right: 1px solid #ccc;
+}
+#tab2 .tab_cont {
+	border: 1px solid #ccc;
+	height: 300px;
+}
+.active {
+	background: red;
+}
+</style>
+	<script>
+window.onload = function()
+{
+	new TablSwitch("tab");
+	new TablSwitch("tab2");
+}
+function TablSwitch(id)
+{
+	var oTab = document.getElementById(id);
+	this.aBtn = oTab.getElementsByTagName("li");
+	this.aDiv = oTab.getElementsByTagName("div");
+	var _this = this;
+	
+	for(var i = 0; i < this.aBtn.length; i++)
+	{
+		this.aBtn[i].index = i;
+		this.aBtn[i].onclick = function()
+		{
+			_this.tab(this);
+		}
+	}
+}
+TablSwitch.prototype.tab = function(oBtn)
+{	
+	for(var i = 0; i < this.aBtn.length; i++)
+	{
+		this.aBtn[i].className = "";
+		this.aDiv[i].style.display = "none";
+	}
+	oBtn.className = "active";
+	this.aDiv[oBtn.index].style.display = "block";
+}
+
+	</script></head>
+<body>
+	<div id="tab">
+		<ul id="ul1">
+			<li class="active">
+				<a href="#">选项一</a>
+			</li>
+			<li>
+				<a href="#">选项一</a>
+			</li>
+			<li>
+				<a href="#">选项一</a>
+			</li>
+		</ul>
+		<div class="tab_cont">选项1内容</div>
+		<div class="tab_cont" style="display:none;">选项2内容</div>
+		<div class="tab_cont" style="display:none;">选项3内容</div>
+	</div>
+	<div id="tab2">
+		<ul id="ul1">
+			<li class="active">
+				<a href="#">选项一</a>
+			</li>
+			<li>
+				<a href="#">选项一</a>
+			</li>
+			<li>
+				<a href="#">选项一</a>
+			</li>
+		</ul>
+		<div class="tab_cont">选项1内容</div>
+		<div class="tab_cont" style="display:none;">选项2内容</div>
+		<div class="tab_cont" style="display:none;">选项3内容</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title></title>
+	<style>
+*{ padding:0; margin:0; border:0; list-style-type:none; text-decoration:none;}
+	</style>
+	<script>
+var arr1 = new Array(12,3,4);
+var arr2 = new Array(12,5,4);
+
+//prototype		原型，可以扩展系统对象
+
+Array.prototype.sum = function()
+{
+	var result = 0;
+	for(var i = 0; i < this.length; i++)
+	{
+		result += this[i];	
+	}
+	return result;
+}
+alert(arr1.sum());
+alert(arr2.sum());
+</script></head>
+
+<body>
+</body>
+</html>

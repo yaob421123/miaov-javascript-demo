@@ -1,0 +1,207 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8" />
+<title></title>
+<style>
+*{ padding:0; margin:0; border:0; list-style-type:none;}
+#box{ width:400px; height:430px; margin:20px auto 0 auto; background:#ccc; overflow:hidden; }
+#box #big_pic{ width:400px; height:320px; overflow:hidden; position:relative;}
+#box #big_pic #prev{ z-index:999; position:absolute; left:10px; top:130px; background:url(040_img/btn.gif) no-repeat 0 0; width:60px; height:60px; filter:alpha(opacity=0);opacity:0;}
+#box #big_pic #next{z-index:999; position:absolute; right:10px; top:130px; background:url(040_img/btn.gif) no-repeat 0 -60px; width:60px; height:60px;filter:alpha(opacity=0);opacity:0;}
+#box #big_pic #mark_left{z-index:998; width:200px; height:320px; position:absolute; left:0; top:0; -background:#38B155;filter:alpha(opacity=0);opacity:0;}
+#box #big_pic #mark_right{z-index:998; width:200px; height:320px; position:absolute; right:0; top:0; -background:#E05355;filter:alpha(opacity=0);opacity:0;}
+#box #big_pic ul{ display:block; width:400px; height:320px;}
+#box #big_pic ul li{ width:400px; height:320px; position:absolute; left:0; top:0; z-index:0; overflow:hidden;}
+#box #smil_pic{ height:94px;  position:relative; left:10px; top:7px; }
+#box #smil_pic ul{ position:absolute;display:block; overflow:hidden; height:94px;}
+#box #smil_pic li{ float:left; width:126px; text-align:center;filter:alpha(opacity=60);opacity:0.6;}
+#box #smil_pic li img{ width:120px; height:94px;}
+</style>
+
+<script>
+function G(obj)
+{
+	return document.getElementById(obj);	
+}
+window.onload = function()
+{
+	var oBox = G("box");
+	var oPrev = G("prev");
+	var oNext = G("next");
+	var oMark_left = G("mark_left");
+	var oMark_right = G("mark_right");
+	
+	var oBig_pic = G("big_pic");
+	var biglUl = oBig_pic.getElementsByTagName("ul")[0]
+	var biglLi = oBig_pic.getElementsByTagName("li");
+	
+	var oSmil_pic = G("smil_pic");
+	var smilUl = oSmil_pic.getElementsByTagName("ul")[0]
+	var smilLi = oSmil_pic.getElementsByTagName("li");
+	var iNow = 0;
+	var iZindex = 2;
+	
+	smilUl.style.width = smilLi.length * smilLi[0].offsetWidth;
+	//左右按钮
+	oPrev.onmouseover = oMark_left.onmouseover = function()
+	{
+		startMove(oPrev,"opacity",100);
+	}
+	oMark_left.onmouseout = function()
+	{
+		startMove(oPrev,"opacity",0);	
+	}
+	oNext.onmouseover = oMark_right.onmouseover = function()
+	{
+		startMove(oNext,"opacity",100);
+	}
+	oMark_right.onmouseout = function()
+	{
+		startMove(oNext,"opacity",0);	
+	}
+	oPrev.onclick = function()
+	{
+		iNow--;
+		if(iNow == -1)
+		{
+			iNow = 	smilLi.length - 1;
+		}
+		tab();
+	}
+	oNext.onclick = function()
+	{
+		iNow++;
+		if(iNow == smilLi.length)
+		{
+			iNow = 0;	
+		}
+		tab();
+	}
+	
+	for(var i = 0; i < smilLi.length; i++)
+	{
+		smilLi[i].index = i;
+		smilLi[i].onmouseover = function()
+		{
+			startMove(this,"opacity",100);
+		}
+		smilLi[i].onmouseout = function()
+		{
+			if(this.index != iNow)
+			{
+				startMove(this,"opacity",60);
+			}		
+		}
+		smilLi[i].onclick = function()
+		{
+			if(this.index == iNow)return;
+			iNow = this.index;
+			
+			tab();
+		}
+		
+		function tab()
+		{
+			for(var i = 0; i < smilLi.length; i++)
+			{
+				startMove(smilLi[i],"opacity",60);
+			}	
+			startMove(smilLi[iNow],"opacity",100);
+			biglLi[iNow].style.zIndex = iZindex++; 
+			biglLi[iNow].style.height = "0px";
+			startMove(biglLi[iNow],"height",biglUl.offsetHeight);
+			if(iNow == 0)
+			{
+				startMove(smilUl,"left",0);
+			}
+			else if(iNow == (smilLi.length - 1))
+			{
+				startMove(smilUl,"left",-(iNow - 2) * smilLi[0].offsetWidth);	
+			}
+			else
+			{
+				startMove(smilUl,"left",-(iNow - 1) * smilLi[0].offsetWidth);
+			}	
+		}
+	}
+}
+
+function getStyle(obj,att)
+{
+	if(obj.currentStyle)
+	{
+		return 	obj.currentStyle[att];
+	}
+	else
+	{
+		return getComputedStyle(obj,false)[att];	
+	}
+}
+function startMove(obj,attr,iTarget)
+{
+	clearInterval(obj.timer);
+	obj.timer = setInterval(function(){
+		var icur;
+		if(attr == "opacity")
+		{
+			icur = parseInt(parseFloat(getStyle(obj, attr)*100));
+		}
+		else
+		{
+			icur = parseInt(getStyle(obj, attr));
+		}
+		
+		var ispeed = (iTarget - icur) / 8;
+		ispeed = ispeed > 0 ? Math.ceil(ispeed):Math.floor(ispeed);
+		if(icur == iTarget)
+		{
+			clearInterval(obj.timer);
+		}
+		else
+		{
+			if(attr == "opacity")
+			{
+				obj.alpha += ispeed;  
+				obj.style.filter = "alpha(opacity="+(icur + ispeed)+")";
+				obj.style.opacity = (icur + ispeed) / 100;
+			}
+			else
+			{
+				obj.style[attr] = icur + ispeed + "px"; 
+			}
+		}
+	},30);
+}
+
+</script>
+</head>
+<body>
+<div id="box">
+	<div id="big_pic">
+		<div id="prev"></div>
+		<div id="next"></div>
+		<a id="mark_left"></a>
+		<a id="mark_right"></a>
+		<ul>
+			<li style="z-index:1;"><img src="040_img/1.jpg" / ></li>
+			<li><img src="040_img/2.jpg" / ></li>
+			<li><img src="040_img/3.jpg" / ></li>
+			<li><img src="040_img/4.jpg" / ></li>
+			<li><img src="040_img/5.jpg" / ></li>
+			<li><img src="040_img/6.jpg" / ></li>
+		</ul>
+	</div>
+	<div id="smil_pic">
+		<ul>
+			<li style="filter:alpha(opacity=100);opacity:1;"><img src="040_img/1.jpg" / ></li>
+			<li><img src="040_img/2.jpg" / ></li>
+			<li><img src="040_img/3.jpg" / ></li>
+			<li><img src="040_img/4.jpg" / ></li>
+			<li><img src="040_img/5.jpg" / ></li>
+			<li><img src="040_img/6.jpg" / ></li>
+		</ul>
+	</div>
+</div>
+</body>
+</html>

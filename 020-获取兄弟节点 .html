@@ -1,0 +1,33 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8" />
+<title></title>
+
+<script>
+/*
+nextElementSbling				上一个元素节点，支持火狐
+nextSbling						上一个元素节点，支持火狐
+
+previousElementSibling			下一个元素节点，支持火狐
+previousSibling					下一个元素节点，支持火狐
+*/
+window.onload = function ()
+{
+	var oLi1 = document.getElementById("li1");
+	var oNext =  oLi1.previousElementSibling || oLi1.previousSibling;
+	oNext.style.background = 'yellow';
+}
+</script>
+</head>
+<body>
+<ul id="ul1">
+	<li>111111111</li>
+	<li>222222222</li>
+	<li>333333333</li>
+	<li id="li1">444444444</li>
+	<li>555555555</li>
+	<li>666666666</li>
+</ul>
+</body>
+</html>

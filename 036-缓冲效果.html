@@ -1,0 +1,34 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8" />
+<title></title>
+<style>
+#div1{width:100px; height:100px; background:red; position:absolute; left:0; top:50px;}
+</style>
+<script>
+var timer = null;
+function startMove(iTarget)
+{
+	var oDiv1 = document.getElementById("div1");
+	clearInterval(timer);
+	timer = setInterval(function(){
+		var ispeed = (iTarget - oDiv1.offsetLeft) / 24;
+		ispeed = ispeed > 0 ? Math.ceil(ispeed):Math.floor(ispeed);
+		if(oDiv1.offsetLeft >= iTarget)
+		{
+			clearInterval(timer);
+		}
+		else
+		{
+			oDiv1.style.left = oDiv1.offsetLeft + ispeed + "px";
+		}
+	},30)
+}
+</script>
+</head>
+<body>
+<input type="button" onclick="startMove(300)" value="开始移动" />
+<div id="div1"></div>
+</body>
+</html>

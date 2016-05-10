@@ -1,0 +1,101 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<meta charset="utf-8" />
+<title></title>
+<style>
+#div1{ width:100px; height:100px;position:absolute; border:1px solid #232222;background:#ccc; }
+#div2{ width:100px; height:100px;position:absolute; border:1px solid #232222;background:red; }
+</style>
+<script>
+window.onload = function()
+{
+	new MoveDiv("div1");
+	new limitDrg("div2");
+}
+function MoveDiv(id)
+{
+	var _this = this;
+	this.oDiv1 = document.getElementById(id);
+	this.disX = 0;
+	this.disY = 0;	
+	
+	this.oDiv1.onmousedown = function(ev)
+	{
+		_this.fndown(ev);
+	}
+}
+MoveDiv.prototype.fndown = function(ev)
+{	
+	var _this = this;
+	var oEvent = ev || event;
+	this.disX = oEvent.clientX - this.oDiv1.offsetLeft;
+	this.disY = oEvent.clientY - this.oDiv1.offsetTop;
+	
+	document.onmousemove = function(ev)
+	{
+		_this.fnover(ev);
+	}
+	document.onmouseup = function()
+	{
+		_this.fnup();
+	}
+	return false;
+}
+MoveDiv.prototype.fnover = function(ev)
+{
+	var oEvent = ev || event;
+	var l = oEvent.clientX - this.disX;
+	var t = oEvent.clientY - this.disY;
+	this.oDiv1.style.left = l + "px";
+	this.oDiv1.style.top = t + "px";
+}
+MoveDiv.prototype.fnup =  function ()
+{
+	document.onmousemove = null;
+	document.onmouseup = null;
+}
+
+
+
+
+
+function limitDrg(id)
+{
+	MoveDiv.call(this, id);//继承伪装
+}
+for(var i in MoveDiv.prototype)
+{
+	limitDrg.prototype[i] = MoveDiv.prototype[i]
+}
+
+limitDrg.prototype.fnover = function(ev)
+{
+	var oEvent = ev || event;
+	var l = oEvent.clientX - this.disX;
+	var t = oEvent.clientY - this.disY;
+	if(l < 0)
+	{
+		l = 0;	
+	}
+	else if(l > (document.documentElement.clientWidth || document.body.clientWidth) - this.oDiv1.offsetWidth){
+		l = (document.documentElement.clientWidth || document.body.clientWidth) - this.oDiv1.offsetWidth;
+	}
+	if(t < 0)
+	{
+		t = 0;	
+	}
+	else if(t > (document.documentElement.clientHeight || document.body.clientHeight) - this.oDiv1.offsetHeight)
+	{
+		t = (document.documentElement.clientHeight || document.body.clientHeight) - this.oDiv1.offsetHeight
+	}
+	this.oDiv1.style.left = l + "px";
+	this.oDiv1.style.top = t + "px";
+}
+</script>
+</head>
+<body>
+<div id="div1"></div>
+<div id="div2"></div>
+</body>
+</html>

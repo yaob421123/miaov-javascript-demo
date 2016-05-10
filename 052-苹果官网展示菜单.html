@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style type="text/css">
+*{margin:0;padding:0;}
+body{background:#EBEBED;_position:relative;_height:100%;}
+img{border:none;display:block;}
+li{list-style:none;}
+.page{
+	-webkit-box-shadow: rgba(0,0,0,0.3) 0 1px 3px;
+	-moz-box-shadow: rgba(0,0,0,0.3) 0 1px 3px;
+	box-shadow: rgba(0,0,0,0.3) 0 1px 3px; 
+	background:#FFFFFF;
+	border-color: #E5E5E5 #DBDBDB #D2D2D2;
+	border-style: solid;
+	border-width: 1px;
+	margin:5px auto 0;
+	width:980px;
+}
+.miaov_box{
+	overflow: hidden;
+	position: relative;
+	width: 820px;
+	z-index: 0;
+	height:158px;
+	margin: 0 70px;
+}
+.miaov_box_head{
+	width: 1680px;	
+}
+.miaov_box_head li{
+	width:140px; 
+	float:left;
+	text-align: center;
+}
+a{
+	text-decoration:none;
+	font: 12px/18px "Lucida Grande","Lucida Sans Unicode",Helvetica,Arial,Verdana,sans-serif;
+	color:#7F7F7F;
+}
+.miaov_box_head li a:hover{color:#333;}
+.miaov_box_foot{
+	height:30px; 
+	text-align:center; 
+	background:#fff; 
+	overflow:hidden;
+	background:url(052_img/nav_bg.png) no-repeat 0 0;
+	background:-moz-linear-gradient(center bottom, rgba(223,223,223,1) 0%, rgba(242,242,242,1) 66%, rgba(242,242,242,1) 90%, rgba(230,230,230,1) 93%, rgba(190,190,190,1) 96%, rgba(150,150,150,1) 100%);
+	background:-webkit-gradient(linear, left bottom, left top, from(rgba(223,223,223,1)), color-stop(66%, rgba(242,242,242,1)), color-stop(90%, rgba(242,242,242,1)), color-stop(93%, rgba(230,230,230,1)), color-stop(96%, rgba(210,210,210,1)), to(rgba(140,140,140,1)));
+	border-bottom:1px solid #ebebeb;
+	position:relative;
+}
+.caret{
+	background: url(052_img/caret_active.gif) no-repeat scroll 0 0;
+    display: block;
+    height: 8px;
+    margin: 0 0 -8px -7px;
+    position: absolute;
+    width: 15px;
+}
+.miaov_box_foot a{
+ 	display: inline-block;
+    margin: 0 15px;
+    padding: 8px 0 6px;
+	cursor:pointer;
+    text-shadow: 0 1px 0 #FFFFFF;
+}
+.miaov_box_foot .show{
+    cursor: default;
+    color:#2B2B2B;	
+}
+.miaov_box_foot a:hover{color:#000;}
+.miaov{height:36px;line-height:26px;text-align:center;position:fixed;_position:absolute;bottom:0;width:100%;}
+.miaov a{color:#777;font-size:16px;}
+.miaov a:hover{color:#555;}
+.miaov_head{height:36px;width:980px;overflow:hidden;margin:0 auto;}
+.miaov_head .left{float:left;}
+.miaov_head .right{float:right;}
+.miaov_head a{line-height:36px;color:#777;}
+.miaov_head a:hover{color:#555;}
+</style>
+<script type="text/javascript" src="js/move2.js"></script>
+<script type="text/javascript">
+function getClass(oParent,sClass)
+{
+	var aEls = oParent.getElementsByTagName("*");
+	var Rsult = [];
+	for(var i =0; i < aEls.length; i++)
+	{
+		if(aEls[i].className == sClass)
+		{
+			Rsult.push(aEls[i]);
+		}
+	}
+	return Rsult;
+}
+window.onload = function()
+{
+	var oDiv1 = document.getElementById("div1");
+	var aLi = getClass(oDiv1, "miaov_box_head")[0].getElementsByTagName("li");
+	var oBtn = getClass(oDiv1, "miaov_box_foot")[0].getElementsByTagName("a");
+	var oCaret = getClass(oDiv1, "caret")[0];
+	var apo = [];
+	var timer = null;
+	
+	for(var i = 0; i < aLi.length; i++)
+	{
+		apo[i] = aLi[i].offsetLeft;
+	}
+	for(var i = 0; i < aLi.length; i++)
+	{
+		aLi[i].style.position = "absolute";
+		aLi[i].style.left = apo[i] + "px";
+	}
+	oBtn[1].onclick = function()
+	{
+		var i = 0;
+		clearInterval(timer);
+		next1();
+		function next1()
+		{
+			timer = setInterval(function(){
+				miaovStartMove(aLi[i],{left:-600},MIAOV_MOVE_TYPE.FLEX);	
+				i++;
+				if(i >= aLi.length / 2)
+				{
+					clearInterval(timer);	
+					timer = setTimeout(next2,500);
+				}
+			},100);	
+		}
+		function next2()
+		{
+			timer = setInterval(function(){
+				miaovStartMove(aLi[i],{left:apo[i - aLi.length / 2]},MIAOV_MOVE_TYPE.FLEX);	
+				i++;
+				if(i >= aLi.length)
+				{
+					clearInterval(timer);
+				}
+			},100);
+		}
+		oBtn[0].className = "";
+		oBtn[1].className = "show";
+		miaovStartMove(oCaret,{left:(this.offsetLeft + this.offsetWidth / 2)},MIAOV_MOVE_TYPE.BUFFER);
+	}
+	oBtn[0].onclick = function()
+	{
+		var i = aLi.length - 1;
+		clearInterval(timer);
+		next1();
+		function next1()
+		{
+			timer = setInterval(function(){
+				miaovStartMove(aLi[i],{left:900},MIAOV_MOVE_TYPE.FLEX);	
+				i--;
+				if(i < aLi.length / 2)
+				{
+					clearInterval(timer);
+					timer = setTimeout(next2,500);	
+				}
+			});	
+		}
+		function next2()
+		{
+			timer = setInterval(function(){
+				miaovStartMove(aLi[i],{left:apo[i]},MIAOV_MOVE_TYPE.FLEX);	
+				i--;
+				if(i >= 0)
+				{
+					clearInterval(timer);	
+				}
+			});		
+		}
+		oBtn[0].className = "show";
+		oBtn[1].className = "";
+		miaovStartMove(oCaret,{left:(this.offsetLeft + this.offsetWidth / 2)},MIAOV_MOVE_TYPE.BUFFER);
+	}
+}
+</script>
+</head>
+
+<body>
+<div id="div1" class="page">
+	<div class="miaov_box">
+		<ul class="miaov_box_head">
+			<li><a ><img src="052_img/1.jpg" alt=""/>iPod shuffle</a></li>
+			<li><a ><img src="052_img/2.jpg" alt=""/>iPod nano</a></li>
+			<li><a ><img src="052_img/3.jpg" alt=""/>iPod classic</a></li>
+			<li><a ><img src="052_img/4.jpg" alt=""/>iPod touch</a></li>
+			<li><a ><img src="052_img/5.jpg" alt=""/>Apple TV</a></li>
+			<li><a ><img src="052_img/6.jpg" alt=""/>Accessories</a></li>
+			<li><a ><img src="052_img/7.jpg" alt=""/>Download iTunes 10</a></li>
+			<li><a ><img src="052_img/8.jpg" alt=""/>iTunes Gift Cards</a></li>
+			<li><a ><img src="052_img/9.jpg" alt=""/>Nike + iPod</a></li>
+			<li><a ><img src="052_img/10.jpg" alt=""/>(PRODUCT) RED</a></li>
+			<li><a ><img src="052_img/11.jpg" alt=""/>MobileMe</a></li>
+			<li><a ><img src="052_img/12.jpg" alt=""/>In-Ear Headphones</a></li>
+		</ul>
+	</div>
+	<div class="miaov_box_foot"> 
+		<span style="left: 424px;" class="caret"></span> 
+		<a class="show">Products</a> 
+		<a>iTunes and more</a> 
+	</div>
+</div>
+</body>
+</html>

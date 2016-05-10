@@ -1,0 +1,54 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title></title>
+<style>
+#div1{ width:200px; height:30px; background:red;}
+#div2{ width:150px; height:20px; background:#ccc; display:none; margin-top:20px;}
+</style>
+<script>
+window.onload = function ()
+{
+	var oDiv1 = document.getElementById("div1");
+	var oDiv2 = document.getElementById("div2");
+	var timer = null;
+	
+	<!--
+	function show()
+	{
+		clearTimeout(timer);
+		oDiv2.style.display = "block";
+	}
+	function hide()
+	{
+		timer = setTimeout(function(){
+			oDiv2.style.display = "none";
+		},500);
+	}
+	
+	oDiv1.onmouseover = show;
+	oDiv1.onmouseout = hide;
+	oDiv2.onmouseover = show;
+	oDiv2.onmouseout = hide;
+	-->
+	
+	oDiv1.onmouseover = oDiv2.onmouseover = function()
+	{
+		clearTimeout(timer);
+		oDiv2.style.display = "block";
+	}
+	oDiv1.onmouseout = oDiv2.onmouseout = function()
+	{
+		timer = setTimeout(function(){
+			oDiv2.style.display = "none";
+		},500);
+	}
+}
+</script>
+</head>
+<body>
+<div id="div1"></div>
+<div id="div2"></div>
+</body>
+</html>

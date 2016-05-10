@@ -1,0 +1,151 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<meta charset="utf-8" />
+<title></title>
+<style>
+* {
+	margin: 0px;
+	padding: 0;
+	border: none;
+}
+img {
+	display: block;
+}
+#div1 {
+	width: 200px;
+	height: 200px;
+	padding: 5px;
+	border: 1px solid #ccc;
+	position: relative; margin:20px;
+}
+#div1 .small_pic {
+	width: 200px;
+	height: 200px;
+	background: #eee;
+	position: relative;
+}
+#div1 .float_layer {
+	width: 50px;
+	height: 50px;
+	border: 1px solid #000;
+	background: #fff;
+filter: alpha(opacity: 30);
+	opacity: 0.3;
+	position: absolute;
+	top: 0;
+	left: 0;
+	display: none;
+}
+#div1 .mark {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	z-index: 2;
+	left: 0px;
+	top: 0px;
+	background: red;
+filter:alpha(opacity:0);
+	opacity: 0;
+}
+#div1 .big_pic {
+	position: absolute;
+	top: -1px;
+	left: 215px;
+	width: 250px;
+	height: 250px;
+	overflow: hidden;
+	border: 2px solid #CCC;
+	display: none;
+}
+#div1 .big_pic img {
+	position: absolute;
+	top: -30px;
+	left: -80px;
+}
+</style>
+<script>
+function getClass(aParent,sClass)
+{
+	var aEl = aParent.getElementsByTagName("*");
+	var ArrClass = [];
+	for(var i = 0; i < aEl.length; i++)
+	{
+		if(aEl[i].className == sClass)
+		{
+			ArrClass.push(aEl[i]);
+		}
+	}
+	return ArrClass;
+}
+window.onload = function()
+{
+	var oDiv1 = document.getElementById("div1");	
+	var oSmallPic = getClass(oDiv1, "small_pic")[0];
+	var oMark = getClass(oDiv1, "mark")[0];
+	var oFlayer = getClass(oDiv1, "float_layer")[0];
+	var oBigPic = getClass(oDiv1, "big_pic")[0];
+	var aImg = oBigPic.getElementsByTagName("img")[0];
+	
+	oMark.onmouseover = function()
+	{
+		oFlayer.style.display = "block";
+		oBigPic.style.display = "block";
+	}
+	
+	oMark.onmouseout = function()
+	{
+		oFlayer.style.display = "none";
+		oBigPic.style.display = "none";
+	}
+	oMark.onmousemove = function(ev)
+	{
+		var oEvent = ev || event;
+		
+		var l = oEvent.clientX - oDiv1.offsetLeft - oSmallPic.offsetLeft - oFlayer.offsetWidth / 2;
+		var t = oEvent.clientY  - oDiv1.offsetTop - oSmallPic.offsetLeft - oFlayer.offsetHeight / 2;
+		
+		if(l < 0)
+		{
+			l = 0;	
+		}
+		else if(l > oMark.offsetWidth - oFlayer.offsetWidth)
+		{
+			l = oMark.offsetWidth - oFlayer.offsetWidth;
+		}
+		if(t < 0)
+		{
+			t = 0;	
+		}
+		else if(t > oMark.offsetHeight - oFlayer.offsetHeight)
+		{
+			t = oMark.offsetHeight - oFlayer.offsetHeight;
+		}
+		
+		oFlayer.style.left = l + "px";
+		oFlayer.style.top = t + "px";
+		
+		var percenterX = l / (oMark.offsetWidth - oFlayer.offsetWidth);
+		var percenterY = t / (oMark.offsetHeight - oFlayer.offsetHeight);
+		
+		aImg.style.left = -percenterX * (aImg.offsetWidth - oBigPic.offsetWidth) + "px";
+		aImg.style.top = -percenterY * (aImg.offsetHeight - oBigPic.offsetHeight) + "px";
+		
+		document.title = percenterX + ":" + percenterY;
+	}
+}
+</script>
+</head>
+<body>
+<div id="div1">
+	<div class="small_pic"> 
+		<span class="mark"></span> 
+		<span class="float_layer"></span> 
+		<img src="049_img/small.png"  /> 
+	</div>
+	<div class="big_pic"> 
+		<img src="049_img/big.png"  /> 
+	</div>
+</div>
+</body>
+</html>

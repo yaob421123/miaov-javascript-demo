@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8" />
+<title></title>
+<style>
+*{ margin:0px; padding:0px;list-style:none; font-size:12px;}
+</style>
+<script>
+/*
+push		从数组尾添加
+sort		排序（只能排字符串）
+join		数组拼接成字符串
+split		与join相反将字符串转换成数组
+concat		拼接数组
+splice		删除元素
+splice（起始位置，删除个数）
+splice（起始位置，删除个数，添加）
+*/
+var arr = [111,2,65,15,5];
+arr.sort(function(num1, num2){
+	return num1 - num2;
+});
+
+//alert(arr);
+//alert(arr.join('-'));
+
+var str = "12-4-6-1-89";
+var arr = str.split('-');
+alert(arr[1]);
+
+var arr1 = [1,2,3];
+var arr2 = [5,6,7];
+
+//alert(arr1.concat(arr2));
+</script>
+</head>
+<body>
+
+</div>
+</body>
+</html>

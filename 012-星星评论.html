@@ -1,0 +1,59 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8" />
+<title></title>
+<style>
+*{ margin:0px; padding:0px;list-style:none; font-size:12px;}
+.pinglun{overflow:hidden; width:200px; margin:50px auto 0;}
+.pinglun ul{display:block; width:150px; margin:0 auto; float:left;}
+.pinglun ul li{ background:url(012_img/xx.jpg) no-repeat;width:21px; height:21px; float:left; margin:0 2px;}
+.active{ background:url(012_img/xx_h.jpg) no-repeat !important;}
+.pinglun p{ display:block; float:left; display:none;}
+</style>
+<script>
+window.onload = function ()
+{
+	var arr = ['很差','糟糕','一般','很好','推荐'];
+	var oDiv = document.getElementById("pl");
+	var aLi = oDiv.getElementsByTagName("li");
+	var oP = oDiv.getElementsByTagName("p")[0];
+	for(var i=0;i<aLi.length;i++)
+	{
+		aLi[i].index = i;
+		aLi[i].onmouseover = function()
+		{
+			oP.style.display = "block";
+			oP.innerHTML = arr[this.index];
+			for(var i=0;i<=this.index; i++){
+				aLi[i].className = "active";
+			}
+		}
+		aLi[i].onmouseout = function()
+		{
+			oP.style.display = "none";
+			for(var i=0;i<=this.index; i++){
+				aLi[i].className = "";
+			}
+		}
+		aLi[i].onclick = function()
+		{
+			alert("获得"+(this.index+1) +"评分");
+		}
+	}
+}
+</script>
+</head>
+<body>
+<div class="pinglun" id="pl">
+	<ul>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+	</ul>
+	<p>一般</p>
+</div>
+</body>
+</html>

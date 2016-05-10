@@ -1,0 +1,84 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8" />
+<title></title>
+<style>
+*{ padding:0; margin:0; border:0; list-style-type:none; text-decoration:none;}
+.nav ul{ clear:both; margin:50px auto 0 auto; position:relative; background:#ccc; display:block; overflow:hidden; width:505px; height:50px; }
+.nav ul li{ float:left; width:100px; height:50px; line-height:50px; text-align:center; z-index:2;position:relative; border-right:1px solid #BFBFBF;}
+.nav ul li a{ color:#424242; display:block;}
+.nav ul li.on a{ color:#FFFFFF;}
+#bg{ position:absolute; width:100px; height:50px; left:0; top:0; background:#9F893C; z-index:1; overflow:hidden; border:none;}
+
+.nav2{ margin-left:50px;}
+.nav2 ul{ width:100px; height:255px; position:relative;background:#ccc;}
+.nav2 ul li{ width:100px; height:50px; line-height:50px; text-align:center;border-bottom:1px solid #BFBFBF; position:relative; z-index:2; overflow:hidden;}
+.nav2 ul li a{ color:#424242; display:block;}
+.nav2 ul li.on a{ color:#FFFFFF;}
+.nav2 #bg2{position:absolute; width:100px; height:50px; left:0; top:0; background:#9F893C; z-index:1; overflow:hidden; border:none;}
+</style>
+<script>
+window.onload = function()
+{
+	var oUl1 = document.getElementById("ul1");
+	var aLi = oUl1.getElementsByTagName("li");
+	var oBg = document.getElementById("bg");
+	
+	for(var i = 0; i < aLi.length - 1; i++)
+	{
+		aLi[0].className= "on";
+		aLi[i].onmouseover = function()
+		{
+			if(aLi[0].offsetLeft < 1)
+			{
+				aLi[0].className= ""
+			}
+			this.className= "on"
+			startMove(oBg,this.offsetLeft);	
+		}
+		aLi[i].onmouseout = function()
+		{
+			this.className= ""
+			aLi[0].className= "on"
+			startMove(oBg,aLi[0].offsetLeft);	
+		}
+	}
+}
+var ispeed = 0;
+var left = 0;
+function startMove(obj,iTarget)
+{
+	clearInterval(obj.timer);
+	obj.timer = setInterval(function(){
+		ispeed += (iTarget - obj.offsetLeft) / 5;
+		ispeed *= 0.7;
+		
+		left += ispeed;
+		if(Math.abs(ispeed) < 1 && Math.abs(left - iTarget) < 1)
+		{
+			clearInterval(obj.timer);
+			obj.style.left = iTarget + "px";
+		}
+		else
+		{
+			obj.style.left = left  + "px";
+		}
+		document.title=ispeed;
+	},30);	
+}
+</script>
+</head>
+<body>
+<div class="nav">
+	<ul id="ul1">
+		<li><a href="#">首页</a></li>
+		<li><a href="#">网站简介</a></li>
+		<li><a href="#">网站简介</a></li>
+		<li><a href="#">网站简介</a></li>
+		<li><a href="#">网站简介</a></li>
+		<li id="bg"></li>
+	</ul>
+</div>
+</body>
+</html>

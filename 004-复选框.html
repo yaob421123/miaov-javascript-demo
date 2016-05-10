@@ -1,0 +1,39 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>无标题文档</title>
+<style>
+*{ text-decoration:none; list-style-type:none; padding:0px; margin:0px;}
+input{ margin:10px 0 0 20px;}
+</style>
+<script>
+window.onload = function (){
+	var oBtn = document.getElementById("btn");
+	var ainput = document.getElementsByTagName("input");
+	oBtn.onclick = function (){
+		for(i =0; i<ainput.length; i++){
+			if(ainput[i].checked == true){
+				ainput[i].checked = false;
+			}else{
+				ainput[i].checked = true;
+			}
+		}
+	}
+}
+</script>
+</head>
+<body>
+<p id="btn">全选</p>
+<input type="checkbox" /><br/>
+<input type="checkbox" /><br/>
+<input type="checkbox" /><br/>
+<input type="checkbox" /><br/>
+<input type="checkbox" /><br/>
+<input type="checkbox" /><br/>
+<input type="checkbox" /><br/>
+<input type="checkbox" /><br/>
+<input type="checkbox" /><br/>
+<input type="checkbox" /><br/>
+</body>
+</html>

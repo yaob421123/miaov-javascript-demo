@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8" />
+<title></title>
+<style>
+#img1{filter:alpha(opacity:50);opacity:0.5;}
+</style>
+<script>
+window.onload = function()
+{
+	var oImg1 = document.getElementById("img1");
+	oImg1.onmouseover = function()
+	{
+		startMove(100);
+	}
+	oImg1.onmouseout = function()
+	{
+		startMove(50);
+	}
+}
+var timer = null;
+var alpha = 50;
+function startMove(iTarget)
+{
+	var oImg1 = document.getElementById("img1");
+	clearInterval(timer);
+	timer = setInterval(function(){
+		var ispeed = 0;
+		if(alpha < iTarget)
+		{
+			ispeed = 5;
+		}
+		else
+		{
+			ispeed = -5;
+		}
+		if(alpha == iTarget)
+		{
+			clearInterval(timer);
+		}
+		else
+		{
+			alpha += ispeed;
+			oImg1.style.filter = "alpha(opacity:"+alpha+")";
+			oImg1.style.opacity = alpha/100;
+		}
+	},30)
+}
+</script>
+</head>
+<body>
+<img id="img1" src="035_img/000.jpg" />
+</body>
+</html>

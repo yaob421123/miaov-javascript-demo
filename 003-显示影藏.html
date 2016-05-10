@@ -1,0 +1,35 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>无标题文档</title>
+<style>
+*{ text-decoration:none; list-style-type:none; padding:0px; margin:0px;}
+#ul1{ display:none;}
+</style>
+<script>
+window.onload = function (){
+	var oBox = document.getElementById("box");	
+	var oBtn = document.getElementById("btn");	
+	var oUl1 = document.getElementById("ul1");	
+	oBtn.onclick = function (){
+		if(oUl1.style.display == "block"){
+			oUl1.style.display = "none";	
+		}else{
+			oUl1.style.display = "block";	
+		}
+	}
+}
+</script>
+</head>
+<body>
+<div id="box">
+	<p id="btn">输入法</p>
+	<ul id="ul1">
+		<li><a href="#">手写1</a></li>
+		<li><a href="#">手写2</a></li>
+		<li><a href="#">手写3</a></li>
+	</ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,140 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<style>
+
+* { padding: 0; margin: 0; }
+body { background: #191919 url(051_img/body.gif); margin: 20px 0; }
+
+#miaov { width: 600px; height: 660px; background: url(051_img/miaov_bg.jpg) no-repeat; position: relative; margin: 0 auto; }
+
+#fill_in { font-size: 14px; color: #ccc; font-weight: bold; position: absolute; top: 108px; left: 136px; }
+#fill_in input { background: none; border: 0; text-align: center; font-weight: bold; font-size: 14px; color: #ccc; float: left; overflow: hidden;height: 18px; line-height: 18px; color: #666; position: relative; top: 2px; }
+#fill_in span { float: left; padding-top: 4px; text-align:center; }
+#fill_in .long_text { width: 80px;  }
+#fill_in .text { width: 50px; }
+#fill_in .title { width: 60px; }
+#fill_in .space1 { width: 36px; }
+#fill_in .space2 { width: 28px; }
+#fill_in .space3 { padding-left: 8px; }
+
+.go { position: absolute; top: 155px; left: 237px; width: 150px; height: 150px; }
+.go:hover { background: url(051_img/btn_hover.jpg) no-repeat; }
+.active {position: absolute; top: 155px; left: 237px; width: 150px; height: 150px; background: url(051_img/btn_hover.jpg) no-repeat; filter:alpha(opacity:0); opacity:0;}
+
+#target { width: 100%; text-align: center; color: #ccc; font-weight: bold; position: absolute; left: 0; top: 336px; font-family: arial; }
+#target strong { color: #fef58c; }
+
+#date { position: absolute; top: 392px; right: 92px; color: #fc3; font-size: 48px; font-family: arial; font-weight: bold; }
+#date p { position: absolute; top: 0; }
+#day { right: 340px; }
+#hour { right: 236px; }
+#min { right: 102px; }
+#sec { right: 0; }
+
+h1 { position: absolute; bottom: 0; right: 0; }
+h1 a { position: absolute; right: 40px; bottom: 30px; width: 292px; height: 72px; }
+</style>
+</head>
+<script type="text/javascript">
+window.onload = function()
+{
+	var oFillIn = document.getElementById("fill_in");
+	var oYear = oFillIn.getElementsByTagName("input")[0];
+	var oMonth = oFillIn.getElementsByTagName("input")[1];
+	var oDate = oFillIn.getElementsByTagName("input")[2];
+	var aTarget = document.getElementById("target").getElementsByTagName("strong")[0];
+	var oDay = document.getElementById("day");
+	var oHour = document.getElementById("hour");
+	var oMin = document.getElementById("min");
+	var oSec = document.getElementById("sec");
+	
+	var oGo = document.getElementById("go2");
+	var timer = null;
+	
+	oGo.onclick = function()
+	{
+		
+		timer = setInterval(updateTime,1000);
+		updateTime();
+		aTarget.innerHTML = oYear.value + "年" + oMonth.value + "月" + oDate.value + "日";
+	}
+	function updateTime()
+	{
+		var endDate = new Date();
+		var nowDate = new Date();
+		endDate.setFullYear(parseInt(oYear.value));
+		endDate.setMonth(parseInt(oMonth.value)-1);
+		endDate.setDate(parseInt(oDate.value));
+		endDate.setHours(0);
+		endDate.setMinutes(0);
+		endDate.setSeconds(0);
+		
+		var iRemain = (endDate.getTime() - nowDate.getTime()) / 1000; 
+		if(iRemain < 0)
+		{
+			alert("时间过期");
+			clearInterval(timer);
+			iRemain = 0;
+		}
+		
+		var iday = parseInt(iRemain/86400);
+		iRemain %= 86400;
+		
+		var iHours = parseInt(iRemain/3600);
+		iRemain %= 3600;
+		
+		var iMin = parseInt(iRemain/60);
+		iRemain %= 60;
+		
+		var iSec = iRemain;
+		oDay.innerHTML = setDigit(iday,3);
+		oHour.innerHTML = setDigit(iHours,2);
+		oMin.innerHTML = setDigit(iMin,2);
+		oSec.innerHTML = setDigit(iSec,2);	
+	}
+	function setDigit(num, n)
+	{
+		var str = "" + num;
+		while(str.length < n)
+		{
+			str = "0" + str;
+		}	
+		return str;
+	}
+}
+</script>
+<body>
+
+<div id="miaov">
+    <div id="fill_in">
+        <span class="title">请输入：</span>
+        <input type="text" class="long_text" value="2015" />
+        <span class="space1">年</span>
+        <input type="text" class="text" value="6" />
+        <span class="space2">月</span>
+        <input type="text" class="text" value="28" />
+        <span class="space3">日</span>
+    </div>
+
+    <a href="javascript:;" id="go" class="go"></a>
+    <a href="javascript:;" id="go2" class="active"></a>
+
+    <p id="target">
+        现在距离 -
+        <strong>2015年6月28日</strong>
+        - 还剩：
+    </p>
+
+    <div id="date">
+        <p id="day">000</p>
+        <p id="hour">00</p>
+        <p id="min">00</p>
+        <p id="sec">00</p>
+    </div>
+</div>
+
+</body>
+</html>

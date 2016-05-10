@@ -1,0 +1,64 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8" />
+<title></title>
+<style>
+*{ margin:0px; padding:0px;list-style:none; font-size:12px;}
+#div1{ width:200px; height:200px; background:#FF0004;}
+</style>
+<script>
+/*
+重点
+arguments			类数组对象
+currentStyle		获取样式，支持ie浏览器
+getComputedStyle	获取样式，支持火狐浏览器
+*/
+function getStyle(obj, arr)
+{
+	if(obj.currentStyle)//如果是ie浏览为真
+	{
+		return obj.currentStyle[arr];
+	}
+	else
+	{
+		return getComputedStyle(obj,false)[arr];
+	}
+}
+
+function getCss(obj, arr, value)
+{
+	if(arguments.length == 2)
+	{
+		return 	getStyle(obj,arr);
+	}	
+	if(arguments.length == 3)
+	{
+		obj.style[arr] = value;
+	}
+}
+window.onload = function ()
+{
+	var OBtn1 = document.getElementById("btn1");
+	var OBtn2 = document.getElementById("btn2");
+	var ODiv1 = document.getElementById("div1");
+	
+	OBtn1.onclick = function()
+	{
+		alert(getCss(ODiv1,'width'));
+	}
+	
+	OBtn2.onclick = function()
+	{
+		getCss(ODiv1,'background','green');
+	}
+}
+</script>
+</head>
+<body>
+<input id="btn1" type="button" value="获取宽度" />
+<input id="btn2" type="button" value="改变颜色" />
+<div id="div1"></div>
+</div>
+</body>
+</html>

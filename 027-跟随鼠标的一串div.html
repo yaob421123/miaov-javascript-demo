@@ -1,0 +1,48 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8" />
+<title></title>
+<style>
+div{ background:red; width:50px; height:50px; position:absolute;}
+</style>
+<script>
+/*
+*/
+document.onmousemove = function(ev)
+{
+	var aDiv = document.getElementsByTagName("div");
+	document.onmousemove = function(ev)
+	{
+		var oEvent = ev || event;
+		var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+		var scrollLeft = document.documentElement.scrollLeft || document.body.scrollLeft;
+		for(var i = aDiv.length - 1; i > 0; i--)
+		{
+			aDiv[i].style.top = aDiv[i - 1].style.top;
+			aDiv[i].style.left = aDiv[i - 1].style.left;
+		}
+		aDiv[0].style.top = oEvent.clientY + scrollTop + "px";
+		aDiv[0].style.left = oEvent.clientX + scrollLeft + "px";
+	}
+}
+</script>
+</head>
+<body style="height:2000px;">
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+</body>
+</html>

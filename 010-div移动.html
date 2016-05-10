@@ -1,0 +1,34 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset = "utf-8" />
+<title></title>
+<style>
+*{ margin:0px; padding:0px;}
+#div1{ width:100px; height:100px; background:#ccc; left:0px; position:absolute;}
+</style>
+<script>
+window.onload = function(){
+	var oBtn1 = document.getElementById("btn1");
+	var oBtn2 = document.getElementById("btn2");
+	var oDiv1 = document.getElementById("div1");
+	var timer = null;
+	oBtn1.onclick = function()
+	{
+		timer = setInterval(function(){
+			div1.style.left = div1.offsetLeft + 5 + 'px';
+		},30);
+	}
+	oBtn2.onclick = function()
+	{
+		clearInterval(timer);
+	}
+}
+</script>
+<body>
+<input id="btn1" type="button" value="移动开始"/>
+<input id="btn2" type="button" value="移动结束"/>
+<div id="div1"></div>
+</body>
+</head>
+</html>

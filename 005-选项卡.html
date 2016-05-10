@@ -1,0 +1,50 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>无标题文档</title>
+<style>
+*{ text-decoration:none; list-style-type:none; padding:0px; margin:0px; font-size:12px;}
+input{ margin:10px 0 0 20px;}
+#ul1{ height:40px; clear:both;}
+#ul1 li{ width:80px; line-height:40px; float:left; text-align:center;}
+#cont{ border:1px solid #cccccc; width:240px;}
+#cont div{ height:100px; display:none;}
+.active{ background:#990;}
+</style>
+<script>
+window.onload = function (){
+	var oUl1 = document.getElementById("ul1");
+	var abtn = oUl1.getElementsByTagName("li");
+	
+	var oCont = document.getElementById("cont");
+	var acont = oCont.getElementsByTagName("div");
+	
+	for(i=0; i<abtn.length; i++){
+		abtn[i].index = i;
+		abtn[i].onclick = function (){
+			for(i=0; i<abtn.length; i++){
+				abtn[i].className = "";
+				acont[i].style.display = "none";
+			}
+			
+			this.className = "active";
+			acont[this.index].style.display = "block";
+		}
+	}
+}
+</script>
+</head>
+<body>
+<ul id="ul1">
+	<li class="active">选项卡一</li>
+	<li>选项卡二</li>
+	<li>选项卡三</li>
+</ul>
+<div id="cont">
+	<div style="display:block">选项卡一内容</div>
+	<div>选项卡二内容</div>
+	<div>选项卡三内容</div>
+</div>
+</body>
+</html>

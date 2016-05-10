@@ -1,0 +1,59 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8" />
+<title></title>
+<style>
+*{ padding:0; margin:0; border:0; list-style-type:none;}
+ul{ width:360px; margin:50px auto 0 auto; position:relative;}
+ul li{ width:98px; height:98px; float:left; border:1px solid #6E4142; background:#ccc; margin:10px; z-index:0;}
+</style>
+<script type="text/javascript" src="js/move2.js"></script>
+<script>
+window.onload = function()
+{
+	var oUl1 = document.getElementById("ul1");
+	var aLi = oUl1.getElementsByTagName("li");
+	var minZindex = 1;
+	
+	for(var i = 0; i < aLi.length; i++)
+	{
+		//aLi[i].innerHTML = "left:" + aLi[i].offsetLeft + "<br/>top:"+ aLi[i].offsetTop;
+		aLi[i].style.left = aLi[i].offsetLeft + "px";
+		aLi[i].style.top = aLi[i].offsetTop + "px";
+		
+	}
+	for(var i = 0; i < aLi.length; i++)
+	{
+		aLi[i].style.position = "absolute";
+		aLi[i].style.margin = "0";
+		var w = aLi[i].offsetWidth;
+		var h = aLi[i].offsetHeight;
+		
+		aLi[i].onmouseover = function()
+		{
+			this.style.zIndex = minZindex++;
+			startMove(this,{ width:(w+50),height:(h+50),marginLeft:-25,marginTop:-25});	
+		}
+		aLi[i].onmouseout = function()
+		{
+			startMove(this,{ width:98,height:98,marginLeft:0,marginTop:0});	
+		}
+	}
+}
+</script>
+</head>
+<body>
+<ul id="ul1">
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+</ul>
+</body>
+</html>

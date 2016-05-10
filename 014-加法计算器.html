@@ -1,0 +1,45 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8" />
+<title></title>
+<style>
+*{ margin:0px; padding:0px;list-style:none; font-size:12px;}
+
+</style>
+<script>
+//parseInt		整数转换
+//parseFloat	小数转换
+
+
+window.onload = function ()
+{
+	var oTxt1 = document.getElementById("txt1");
+	var oTxt2 = document.getElementById("txt2");
+	var oBtn = document.getElementById("btn");
+	
+	
+	
+	oBtn.onclick = function ()
+	{
+		var num = parseFloat(oTxt1.value) + parseFloat(oTxt2.value);
+		if(isNaN(num))
+		{
+			alert("请输入数字");
+		}else
+		{
+			alert(num);
+		}
+		
+	}
+}
+</script>
+</head>
+<body>
+<div style="margin-left:100px;">
+<input id="txt1" type="text" />
+<input id="txt2" type="text" />
+<input id="btn" type="button" value="求和" />
+</div>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8" />
+<title></title>
+<style>
+*{ padding:0; margin:0; border:0; list-style-type:none; text-decoration:none;}
+</style>
+<script>
+//function createPerson(_name, _sex)
+//{
+//	//var obj = new Object();
+//	this.name = _name;
+//	this.sex = _sex;
+//	this.showName = function()
+//	{
+//		alert(this.name);
+//	}
+//	this.showSex = function()
+//	{
+//		alert(this.sex);
+//	}
+//	//return obj;
+//}
+//var p1 = new createPerson("姚","23");
+//var p2 = new createPerson("姚2","23");
+//p1.showName();
+//p1.showSex();
+//p2.showName();
+//alert(p1.showNam = p2.showNam) ;//false
+
+/**
+混合法
+**/
+function CreatePerson(_name, _sex)
+{
+	this.name = _name;
+	this.sex = _sex;
+}
+CreatePerson.prototype.showName = function()
+{
+	alert(this.name);	
+}
+CreatePerson.prototype.showSex = function()
+{
+	alert(this.sex);
+}
+var p1 = new CreatePerson("姚","23");
+var p2 = new CreatePerson("姚2","23");
+p1.showName();
+p1.showSex();
+//alert(p1.showNam = p2.showNam) ;//true
+</script>
+</head>
+<body>
+</body>
+</html>

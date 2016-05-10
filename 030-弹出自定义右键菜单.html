@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8" />
+<title></title>
+<style>
+#ul1{ width:100px; height:200px; background:#ccc; display:none; position:absolute;}
+</style>
+<script>
+/*
+ctrlKey		返回布尔值默认为false,按下ctrl为true
+altKey	
+shiftKey	
+*/
+
+window.oncontextmenu = function(ev)
+{
+	var oEvent = ev || event;
+	var oUl1 = document.getElementById("ul1");
+	oUl1.style.display = 'block';
+	oUl1.style.left = oEvent.clientX + "px";
+	oUl1.style.top = oEvent.clientY + "px";
+	return false;
+}
+window.onclick = function()
+{
+	var oUl1 = document.getElementById("ul1");	
+	oUl1.style.display = 'none';
+}
+</script>
+</head>
+<body>
+<ul id="ul1">
+	<li>登录</li>
+	<li>回到首页</li>
+	<li>注销</li>
+</ul>
+</body>
+</html>

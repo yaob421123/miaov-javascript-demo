@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8" />
+<title></title>
+
+<script>
+/*
+firstChild			第一个元素子节点，支持ie
+firstElementChild	第一个元素子节点，支持火狐
+
+lastChild			最后一个元素子节点，支持ie
+firstElementChild	最后一个元素子节点，支持火狐
+*/
+window.onload = function ()
+{
+	var oUli = document.getElementById("ul1");
+	//oUli.firstChild.style.background = 'yellow';
+	//oUli.firstElementChild.style.background='yellow';
+	var oFirst = oUli.firstElementChild || oUli.firstChild;
+	oFirst.style.background = 'yellow';
+}
+</script>
+</head>
+<body>
+<ul id="ul1">
+	<li>111111111</li>
+	<li>222222222</li>
+	<li>333333333</li>
+	<li>444444444</li>
+	<li>555555555</li>
+	<li>666666666</li>
+</ul>
+</body>
+</html>

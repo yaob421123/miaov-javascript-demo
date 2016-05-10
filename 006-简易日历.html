@@ -1,0 +1,74 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>无标题文档</title>
+<style>
+*{ text-decoration:none; list-style-type:none; padding:0px; margin:0px; font-size:12px;}
+#table{ width:220px; height:400px; background:#CCC; border:1px solid #999;}
+#table ul{ clear:both; overflow:hidden;}
+#table ul li{ float: left; width:50px; height:50px; background:#666; margin:10px; border:1px solid #FFF; text-align:center; cursor:pointer;}
+#table ul li h2{ font-size:18px;}
+#table ul li p{ font-size:14px;}
+#table ul li.active{ background:#fff; border:1px solid #666;}
+#table .test{ padding:10px;}
+#table .test h2{ font-size:16px;}
+#table .test p{ line-height:24px;}
+</style>
+<script>
+var aData = [
+	"一月份元旦",
+	"二月份过年",
+	"三月份",
+	"四月份",
+	"五月份",
+	"六月份",
+	"七月份",
+	"八月份",
+	"九月份",
+	"十月份",
+	"十一月份",
+	"十二月份"
+];
+
+window.onload = function (){
+	var oTable = document.getElementById("table");
+	var aLi = oTable.getElementsByTagName("li");
+	var oTest = oTable.getElementsByTagName("div")[0];
+	for(i=0;i<aLi.length; i++){
+		aLi[i].index = i;
+		aLi[i].onmouseover = function(){
+			for(i=0; i<aLi.length;i++){
+				aLi[i].className = "";	
+			}	
+			this.className = "active";
+			oTest.innerHTML = "<h2>" + (this.index +1)  + "月份" + "</h2><p>" + aData[this.index] + "</p>";
+		}
+	}
+}
+</script>
+</head>
+<body>
+<div id="table">
+	<ul>
+		<li class="active"><h2>1</h2><p>Jan</p></li>
+		<li><h2>2</h2><p>Feb</p></li>
+		<li><h2>3</h2><p>Mar</p></li>
+		<li><h2>4</h2><p>Apr</p></li>
+		<li><h2>5</h2><p>May</p></li>
+		<li><h2>6</h2><p>Jun</p></li>
+		<li><h2>7</h2><p>Jul</p></li>
+		<li><h2>8</h2><p>Aug</p></li>
+		<li><h2>9</h2><p>Sept</p></li>
+		<li><h2>10</h2><p>Oct</p></li>
+		<li><h2>11</h2><p>Nov</p></li>
+		<li><h2>12</h2><p>Dec</p></li>
+	</ul>
+	<div class="test">
+		<h2>1月份</h2>
+		<p>敬请期待......</p>
+	</div>
+</div>
+
+</body>
+</html>
